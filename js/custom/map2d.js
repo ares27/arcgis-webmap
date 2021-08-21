@@ -84,8 +84,8 @@ require([
         // view.popup.content = response.address;
         console.log(response.address);
         showToast(
-          event.mapPoint.longitude,
-          event.mapPoint.latitude,
+          event.mapPoint.longitude.toFixed(5),
+          event.mapPoint.latitude.toFixed(5),
           response.address
         );
       })
@@ -129,7 +129,9 @@ let option = {
 };
 
 function showToast(lon, lat, address) {
-  toastBody.textContent = `${lon}, ${lat}\n${address}`;
+  // toastBody.textContent = `${lon}, ${lat}\n${address}`;
+  toastAddress.textContent = `${address}`;
+  toastCoords.textContent = `${lon}, ${lat}`;
   let toastElement = new bootstrap.Toast(toastHTMLElement, option);
   toastElement.show();
 }

@@ -28,6 +28,10 @@
     ></script>
     <link
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
       href="https://js.arcgis.com/4.20/esri/themes/light/main.css"
     />
     <script src="https://js.arcgis.com/4.20/"></script>
@@ -48,9 +52,9 @@
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
-        style="top: 88%; left: 40%"
+        style="top: 92%; left: 40%; background-color: rgba(0, 0, 0, 0.01)"
       >
-        <div class="toast-header">
+        <!-- <div class="toast-header">
           <span
             style="
               height: 15px;
@@ -75,7 +79,19 @@
           </button>
         </div>
 
-        <div class="toast-body">Hello, world! I am eating toast</div>
+        <div class="toast-body">Hello, world! I am eating toast</div> -->
+        <div class="row">
+          <div class="col-3 toast-body text-center p-1">
+            <!-- <span class="border border-danger" style="font-size: 35px"> -->
+            <i style="font-size: 35px" class="bi bi-geo ml-2"></i>
+            <!-- </span> -->
+          </div>
+          <div class="col-9 toast-body p-1">
+            <small id="address">1</small>
+            <br />
+            <small id="coords">2</small>
+          </div>
+        </div>
       </div>
     </div>
 
