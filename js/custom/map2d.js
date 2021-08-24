@@ -6,7 +6,8 @@ require([
   "esri/widgets/Expand",
   "esri/widgets/LayerList",
   "esri/widgets/Search",
-  "esri/widgets/BasemapToggle",
+  // "esri/widgets/BasemapToggle",
+  "esri/widgets/BasemapGallery",
   "esri/Graphic",
   "esri/layers/FeatureLayer",
 ], (
@@ -17,7 +18,8 @@ require([
   Expand,
   LayerList,
   Search,
-  BasemapToggle,
+  // BasemapToggle,
+  BasemapGallery,
   Graphic,
   FeatureLayer
 ) => {
@@ -46,28 +48,35 @@ require([
   const searchWidget = new Search({
     view: view,
   });
-  const toggle = new BasemapToggle({
-    view: view,
-    nextBasemap: "arcgis-imagery",
-  });
 
-  var layerList = new LayerList({
+  const layerList = new LayerList({
     view: view,
     container: document.createElement("div"),
   });
 
-  var bgExpand = new Expand({
+  const layerListExpand = new Expand({
     view: view,
     content: layerList.domNode,
     expandIconClass: "esri-icon-layer-list",
+  });
+
+  const basemapGallery = new BasemapGallery({
+    view: view,
+    container: document.createElement("div"),
+  });
+
+  const basemapGalleryExpand = new Expand({
+    view: view,
+    content: basemapGallery.container,
+    expandIconClass: "esri-icon-basemap",
   });
 
   // view.popup.autoOpenEnabled = false;
   view.when(function () {
     // Add UI elements
     view.ui.add(searchWidget, { position: "top-right" });
-    view.ui.add(toggle, { position: "bottom-left" });
-    // view.ui.add(bgExpand, "bottom-right");
+    view.ui.add(basemapGalleryExpand, "top-left");
+    view.ui.add(layerListExpand, "top-left");
   });
 
   view.on("click", (event) => {
