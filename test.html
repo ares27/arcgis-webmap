@@ -28,7 +28,26 @@
 
     <title>Hello, world!</title>
   </head>
-  <body class="bg-dark">
+  <body class="">
+    <div class="container p-3 border border-danger">
+      <div class="row">
+        <div class="col-2 border text-center">
+          <span style="font-size: 40px"> <i class="bi bi-alarm"></i></span>
+        </div>
+        <div class="col-7 border p-0">
+          <div class="col-12 border border-primary">R1</div>
+          <div class="col-12 border border-primary">R2</div>
+        </div>
+        <div class="col border p-0">
+          <div class="col border border-primary">22'C - Cloudy</div>
+          <div class="col border border-primary">
+            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="w" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr />
     <div class="row" style="background-color: rgba(255, 255, 255, 0.4)">
       <div class="col-3 border toast-header justify-content-center">
         <span style="font-size: 40px"><i class="bi bi-alarm"></i></span>
@@ -39,6 +58,8 @@
         <small class="border">-28.1231 33.56451</small>
       </div>
     </div>
+
+    <hr />
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
