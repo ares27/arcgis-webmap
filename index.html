@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./css/bootstrap.min.css" />
-    <title>2D Map</title>
+    <title>ares27-arcgis-webmap</title>
     <style>
       html,
       body,
@@ -52,16 +52,31 @@
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
-        style="top: 92%; left: 40%; background-color: rgba(0, 0, 0, 0.01)"
+        style="top: 92%; left: 40%; background-color: rgba(0, 0, 0, 0.75)"
       >
-        <div class="row">
-          <div class="col-3 toast-body text-center p-1">
-            <i style="font-size: 35px" class="bi bi-geo ml-2"></i>
-          </div>
-          <div class="col-9 toast-body p-1">
-            <small id="address">1</small>
-            <br />
-            <small id="coords">2</small>
+        <div class="container text-white border-radius p-1">
+          <div
+            class="row"
+            style="
+              overflow-wrap: break-word;
+              word-wrap: break-word;
+              hyphens: auto;
+            "
+          >
+            <div class="col-2 text-center p-0">
+              <i style="font-size: 25px" class="bi bi-geo ml-2"></i>
+            </div>
+            <div class="col p-0">
+              <div style="font-size: 11px" class="col-12" id="address">R1</div>
+              <div style="font-size: 11px" class="col-12" id="coords">R2</div>
+            </div>
+            <div class="col text-center p-0">
+              <div style="font-size: 11px" class="col" id="temperature">
+                22'C - Cloudy
+              </div>
+
+              <img id="weather-img" width="25px" height="25px" src="" alt="w" />
+            </div>
           </div>
         </div>
       </div>
