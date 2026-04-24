@@ -21,30 +21,25 @@ require([
   // BasemapToggle,
   BasemapGallery,
   Graphic,
-  FeatureLayer
+  FeatureLayer,
 ) => {
-  // esriConfig.apiKey =
-  // "AAPK38d5964a655b48dbb8fb30fe5bc1098co28bAFzHHonjZPlh5QIp2DRruOGyamDWbvQJegvAQlvfxlKs94COtvB-ad44WdjI";
-
-  const armedConflictLayer = new FeatureLayer(
-    layersArray["armedConflictLayer"]
-  );
-  // map.add(featureLayer);
+  esriConfig.apiKey = "YOUR_API_KEY_HERE";
 
   let locatorTask = new Locator({
     url: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer",
   });
+
   const map = new Map({
-    // basemap: "arcgis-topographic",
     basemap: "topo",
-    layers: armedConflictLayer,
   });
+
   const view = new MapView({
     container: "viewDiv",
     map: map,
     zoom: 7,
     center: [28.200526, -25.856598],
   });
+
   const searchWidget = new Search({
     view: view,
   });
@@ -71,30 +66,21 @@ require([
     expandIconClass: "esri-icon-basemap",
   });
 
-  // view.popup.autoOpenEnabled = false;
-  // view.when(function () {
-  // Add UI elements
   view.ui.add(searchWidget, { position: "top-right" });
   view.ui.add(basemapGalleryExpand, "top-left");
   view.ui.add(layerListExpand, "top-left");
-  // });
 
   view.on("click", (event) => {
     // console.log(event);
     view.graphics.removeAll();
-    // const lats = Math.round(event.mapPoint.latitude * 1000) / 1000;
-    // const long = Math.round(event.mapPoint.longitude * 1000) / 1000;
     dropPoint(event.mapPoint.longitude, event.mapPoint.latitude);
 
     locatorTask
       .locationToAddress({ location: event.mapPoint })
       .then(async function (response) {
-        // view.popup.content = response.address;
-        // console.log(response.address);
-
         const w = await getWeather(
           event.mapPoint.longitude,
-          event.mapPoint.latitude
+          event.mapPoint.latitude,
         );
 
         showToast(
@@ -102,7 +88,7 @@ require([
           event.mapPoint.latitude.toFixed(5),
           response.address,
           `${w.main.feels_like} \xB0C, ${w.weather[0].description}`,
-          `http://openweathermap.org/img/wn/${w.weather[0].icon}.png`
+          `http://openweathermap.org/img/wn/${w.weather[0].icon}.png`,
         );
       })
       .catch(function (err) {
@@ -112,15 +98,11 @@ require([
           event.mapPoint.longitude.toFixed(5),
           event.mapPoint.latitude.toFixed(5),
           genErrorMsg,
-          null
+          null,
         );
       });
-
-    // dropPoint(event.mapPoint.longitude, event.mapPoint.latitude);
-    // showToast(event.mapPoint.longitude, event.mapPoint.latitude);
   });
 
-  // Functions
   function dropPoint(lon, lat) {
     // console.log(`dropPoint(), Lon: ${lon}, Lat: ${lat}`);
     let point = { type: "point", longitude: lon, latitude: lat };
@@ -147,13 +129,17 @@ require([
   }
 });
 
-let option = {
-  animation: true,
-  delay: 20000,
-};
+const toastHTMLElement = document.getElementById("EpicToast");
+const toastBody = document.querySelector(".toast-body");
+const toastAddress = document.querySelector("#address");
+const toastCoords = document.querySelector("#coords");
+const toastTemperature = document.querySelector("#temperature");
+const toastWeatherImg = document.querySelector("#weather-img");
+const option = { animation: true, delay: 20000 };
+OPENWEATHER_APPID = "YOUR_APPID_HERE";
 
 async function getWeather(lon, lat) {
-  const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=cc19389ea496defe82b608ab55f05112`;
+  const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${OPENWEATHER_APPID}`;
   const weather = await fetch(weatherURL);
   const weatherResponse = await weather.json();
   // console.log(`Get Weather: ${lon}, ${lat}`, weatherResponse);
